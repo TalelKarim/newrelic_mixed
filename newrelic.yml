@@ -1,0 +1,22 @@
+- name: Install New Relic infrastructure and logs and php_agent
+  hosts: localhost
+  roles:
+    - role: newrelic.newrelic_install
+      vars:
+        targets:
+          - infrastructure
+          - logs
+          - apm-php
+        tags:
+          - env: prod    
+      environment:
+        NEW_RELIC_API_KEY: test
+        NEW_RELIC_ACCOUNT_ID: 6460765
+        NEW_RELIC_REGION: EU
+        NEW_RELIC_APPLICATION_NAME: "api-fm-prod"
+        
+    - role: newrelic_php_agent_install
+      vars:
+        newrelic_api_key:  test
+        newrelic_account_id: 6460765
+        newrelic_region: "EU"    
